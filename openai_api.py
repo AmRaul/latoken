@@ -1,12 +1,13 @@
 import openai
-from config import settings
+import configparser
+
+config = configparser.ConfigParser()
+config.read("configs.ini")
 
 # Отправка в GPT
 def get_openai_response(question, content):
-    openai.api_key = settings.OPENAI_API_KEY
+    openai.api_key = config["Api"]["OPENAI_API_KEY"]
 
-
-    # Формируем сообщение
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": f"Here's some content from the site: {content}"},
